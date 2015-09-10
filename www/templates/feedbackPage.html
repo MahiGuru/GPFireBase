@@ -1,0 +1,67 @@
+ 
+
+<ion-view view-title="FEEDBACK">
+    <ion-nav-bar class="bar-stable">
+
+        <!--<ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+    </button>
+  </ion-nav-buttons> -->
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+
+    </ion-nav-bar>
+
+
+    <ion-content>
+        
+        <div class="progress" ng-show="loaderVisible"><div class="indeterminate"></div></div>  
+        <!-- The content of the page --> 
+        <h5>General</h5>
+        <div class="row">
+        <div class="two-cols"> 
+                <div class="col col-67">Ambeince</div>
+                <div class="col col-33"><a class="isLikeIcon"> 
+                    <span ng-class="{'greyColor': feedbackDetails.ambience == 0}"><i class="material-icons">thumb_up</i></span>
+                    </a>
+                </div>
+        </div> 
+          <div class="two-cols"> 
+              <div class="col col-67">Service</div>
+                <div class="col col-33"><a class="isLikeIcon"> 
+                    <span ng-class="{'greyColor': feedbackDetails.service == 0}"><i class="material-icons">thumb_up</i></span>
+                    </a>
+                </div>
+          </div>
+
+            </div>
+        
+        <h5>Food</h5>
+        
+        <div class="feedbackItems" id="feedbackItems">
+             
+            <div class="row row-center two-cols" ng-repeat="items in feedbackDetails.itemFeedback">
+              <div class="col col-67">{{items.name}}</div>
+                <div class="col col-33"><a class="isLikeIcon"> 
+                    <span ng-class="{'greyColor':items.isLike == 1}" ng-click="itemLikeMethod(items)"><i class="material-icons">thumb_up</i></span>
+                    </a>
+                </div>
+            </div>
+             
+            
+        </div>
+        <h5>Review Comment</h5>
+        
+  <div class="row">
+          <div class="input-field col s12">
+            <textarea id="textarea1" class="materialize-textarea" length="120"></textarea>
+            <label for="textarea1">Write your comments here</label>
+          </div>
+        </div>
+        <!--<pre>{{ feedbackDetails | json }}</pre>-->
+        <div class="text-right padding-10">
+            <a class="waves-effect waves-light btn">SAVE Feedback</a>
+        </div>
+
+    </ion-content>
+</ion-view>

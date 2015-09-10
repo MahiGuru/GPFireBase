@@ -1,0 +1,47 @@
+<ion-view view-title="Users">
+    <ion-nav-bar class="bar-stable">
+
+        <!--<ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+    </button>
+  </ion-nav-buttons> -->
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+
+    </ion-nav-bar>
+
+
+    <ion-content>
+        <div class="progress" ng-show="loaderVisible"><div class="indeterminate"></div></div>   
+        <!--<pre>{{usersResponse | json}}</pre>-->
+        <div class="list">
+
+          <div class="item item-button-right padding-lr-10" ng-repeat="user in usersResponse.users">
+              <div class="row">
+                  <div class="col col-67  col-center">
+                        {{user.firstName }} {{user.lastName }}
+                  </div>
+                  <div class="col col-33 text-right  col-center">
+                      <div ng-if='(user.status == "Requested")'>
+                            <a class="btn-floating btn-large waves-effect waves-light blue" ng-click="userAcceptMethod(user)">
+                            <i class="material-icons">add</i></a>   
+                      </div>
+                      <div ng-if='(user.status == "Created")'>
+                            <a class="btn-floating btn-large waves-effect waves-light green">
+                            <i class="material-icons">done</i></a>   
+                      </div>
+                      <div ng-if='(user.status == "Added" || user.status == "Joined")'>
+                            <a class="btn-floating btn-large waves-effect waves-light green" ng-click="userAcceptMethod(user)">
+                            <i class="material-icons">done</i></a>   
+                      </div>
+                    
+                  </div>
+              </div>
+          </div>
+         
+        
+        </div>
+        
+        
+    </ion-content>
+</ion-view>

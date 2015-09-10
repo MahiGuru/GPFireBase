@@ -1,0 +1,79 @@
+<ion-modal-view>
+    <!--<ion-header-bar>
+ 
+        <a class="waves-effect waves-teal btn-flat padding-lr-10" ng-click="closeModal()"><i class="large material-icons">clear</i></a> 
+        <h1 class="title">Customize item</h1>
+
+    </ion-header-bar>
+    -->
+    <ion-header-bar align-title="left" class="bar-stable">
+  <div class="buttons"> 
+    <a class="waves-effect waves-teal btn-flat padding-lr-10" ng-click="closeModal()"><i class="large material-icons">clear</i></a> 
+  </div>
+  <h1 class="title">Customize</h1>
+  <div class="buttons">
+      
+        <a class="waves-effect waves-teal btn-flat" ng-click="savePreference(modelItem)"><i class="small material-icons">done</i> ADD</a> 
+  </div>
+</ion-header-bar>
+    <ion-content>
+        <div class="customizeItemArea">
+            <!-- <pre>{{modelItem}}</pre> -->
+            <div class="list card margin-0" ng-class="{{modelItem.FoodType}}">
+
+                <div class="item">
+                    <div class="row">
+                        <div class="col col-33">{{modelItem.ItemName}}
+                            <br />
+                            <a class="tab-item" href="#">
+                                <i class="icon ion-thumbsup"></i> Like
+                            </a>
+                        </div>
+                        <div class="col col-67 text-right padding-lr spinnerArea">
+                            <div>Rs {{modelItem.Price}}</div>
+                            <div> 
+                                <a class="waves-effect waves-teal btn-flat iconMin" ng-click="menuMinusClick(modelItem.ItemId, modelItem)">
+                                    <i class="tiny material-icons">remove</i></a>
+                                <span>
+                                    {{modelItem.reviewCount + modelItem.confirmCount + modelItem.ItemCount }}
+                                </span>
+                                
+                                <a class="waves-effect waves-teal btn-flat iconMin" ng-click="menuPlusClick(modelItem.ItemId, modelItem)">
+                                    <i class="material-icons">add</i></a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div> 
+            </div>
+            <div class="itemChooseArea"> 
+                <h5 class="col">{{customizeData.groupName}}</h5>
+                <div ng-if="customizeData.sType == 'single'">
+                  <ion-radio ng-repeat="option in customizeData.options"
+                             ng-value="option.optionName"
+                             ng-change="customizeRadioChange(option)" 
+                             ng-model="data.customizeRadioSelected">
+                      {{ option.optionName}}
+                  </ion-radio>
+                </div>
+                <div ng-if="customizeData.sType == 'multiple'">
+               <ion-checkbox ng-repeat="option in customizeData.options"
+                      ng-model="data.customizeCheckBoxSelected" 
+                      ng-change="customizeCheckboxChange(option)" 
+                      ng-checked="option.selected">
+                   {{ option.optionName}}
+                </ion-checkbox> 
+                </div>
+            </div>
+            
+             
+
+ 
+        </div>
+        <div ng-if="customizeData.status">
+        </div>
+
+    </ion-content>
+</ion-modal-view>

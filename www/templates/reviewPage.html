@@ -1,0 +1,113 @@
+<ion-view view-title="REVIEWS">
+    <ion-nav-bar class="bar-stable">
+
+        <!--<ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+    </button>
+  </ion-nav-buttons> -->
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+
+    </ion-nav-bar>
+
+
+    <ion-content>
+        
+        <div class="progress" ng-show="loaderVisible"><div class="indeterminate"></div></div>  
+        
+        <ion-scroll direction="x" class="wide-as-needed text-center scrollTabs reviewscrollTabs">
+            <a class="button inline-button" ng-click="slideGoto(0)" ng-class="{active:myActiveSlide == 0}"><span>Review Items
+            </span></a>
+            <a class="button inline-button" ng-click="slideGoto(1)" ng-class="{active:myActiveSlide == 1}"><span>Confirm Items
+            </span></a>
+        </ion-scroll>
+
+        
+        <ion-scroll zooming="true" direction="y" style="height: {{winHeight - 200}}px">
+        <ion-slide-box class="reviewContent " active-slide="myActiveSlide" does-continue="false" on-slide-changed="slideHasChanged($index)">
+
+            <ion-slide>
+
+                <div class="box">
+                    <div class="row"> 
+                    <div ng-if="(reviewItems.length == 0)" class="col col-middle"> <br><br><br><br>There are no review items</div>
+                        </div>
+                    <ion-list>
+                        <div class="reviewOrders reviewItems" ng-repeat="reviewItem in reviewItems">
+                            <ion-item class="item-stable item-icon-right categoryName waves-effect waves-teal block" ng-click="toggleGroup(reviewItem)" ng-class="{active: isGroupShown(reviewItem)}">
+                                <div class="row">
+                                    <div class="col s8 padding-lr">
+                                        &nbsp; {{reviewItem.itemName}}</div>
+                                  
+                                    <div class="col s3 text-right">
+                                        <span>X {{reviewItem.reviewCount}}</span>
+                                        <i class="icon" ng-class="isGroupShown(reviewItem) ? 'ion-ios-arrow-up' : 'ion-ios-arrow-down'"></i> 
+                                    </div>
+                                </div>
+                            </ion-item>
+                            <div class="items" ng-show="isGroupShown(reviewItem)">
+                                <ion-item class="item-accordion" ng-repeat="item in reviewItem.kotitems">
+                                    <div class="row"> 
+                                    <div class="col s6"> 
+                                        <h2>{{item.firstName +' '+item.lastName}}</h2>
+                                    </div>
+                                    <div class="col s6 reviewSpinnerArea">
+                                        <a class="waves-effect waves-teal btn-flat iconMin" ng-click="menuMinusClick(reviewItem.itemId, reviewItem)">
+                                            <i class="tiny material-icons">remove</i></a>
+                                        <span ng-init="reviewItem.reviewCount = item.quantity">
+                                                 <!--{{reviewItem.reviewCount + reviewItem.confirmCount }} -->
+                                                 {{reviewItem.reviewCount}}
+                                        </span>
+                                        <a class="waves-effect waves-teal btn-flat iconMin" ng-click="menuPlusClick(reviewItem.itemId, reviewItem)">
+                                            <i class="material-icons">add</i></a>
+                                    </div>
+                                    </div>
+                                </ion-item>
+                            </div> 
+                        </div>
+                    </ion-list>
+                </div>
+                <div class="text-right padding-10"> 
+                        <a ng-show="(reviewItems.length > 0)"  class="waves-effect waves-light btn placeOrderBtn" ng-click="placeOrder()">
+                            <i class="material-icons right"></i>Place Order</a> 
+                </div>
+
+            </ion-slide>
+
+            <ion-slide>
+                <div class="box">
+                    <ion-list>
+                        <div ng-if="(confirmedItems.length == 0)">
+                            <br><br><br>
+                            <br>There are no pending items to confirme
+                            <br>
+                            <br>
+                        </div>
+                        <div class="reviewOrders" ng-repeat="confirmItem in confirmedItems">
+
+                            <ion-item class="item-stable item-icon-right categoryName" ng-click="toggleGroup(confirmItem)" ng-class="{active: isGroupShown(confirmItem)}">
+                                <i class="icon" ng-class="isGroupShown(confirmItem) ? 'ion-ios-arrow-down' : 'ion-ios-arrow-right'"></i> &nbsp; {{confirmItem.itemName}}
+                            </ion-item>
+                            <div class="items" ng-show="isGroupShown(confirmItem)">
+                                <ion-item class="item-accordion" ng-repeat="item in confirmItem.kotitems">
+
+                                    <h2>{{item.firstName +' '+item.lastName +' '+item.quantity}}</h2>
+                                </ion-item>
+                            </div>
+                        </div>
+                    </ion-list>
+                </div> 
+                <div class="text-right padding-10">
+                     
+                        <a class="waves-effect waves-light btn checkOutBtn" ng-show="(confirmedItems.length > 0)"  href="#/gp/invoice/{{orderInfo.orderNumber}}">
+                            <i class="material-icons right"></i>CHECK OUT</a>
+                     </div>
+            </ion-slide>
+
+
+
+        </ion-slide-box>
+        </ion-scroll>
+
+    </ion-content>
+</ion-view>

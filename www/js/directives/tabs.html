@@ -1,0 +1,11 @@
+
+<div class="tabbable">
+     
+  <ul class="nav nav-tabs">
+       
+    <li ng-repeat="pane in panes" ng-class="{active:myActiveSlide == {{$index}} }"> 
+      <a href="" ng-click="slideGoto({{$index}})" >{{pane.title}}</a>
+    </li> 
+  </ul>
+  <div class="tab-content" ng-transclude></div>
+</div>

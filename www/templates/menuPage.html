@@ -1,0 +1,143 @@
+<ion-header-bar align-title="left" class=" bar-stable">
+    <h1 class="title"> MENU</h1>
+    <div class="buttons">
+        <a><i class="button button-icon icon small searchIcon  material-icons">search</i></a>
+         &nbsp;&nbsp;
+        <a class="button button-icon icon ion-funnel" ng-click="showPopup()"></a> 
+    </div>
+
+
+</ion-header-bar>
+
+<ion-view view-title="MENU">
+
+    <ion-content>
+ 
+
+        <div class="progress" ng-show="loaderVisible"><div class="indeterminate"></div></div> 
+        <!--<ul class="list margin-0">
+
+                          <li class="item item-toggle">
+                             HTML5
+                             <label class="toggle toggle-assertive">
+                               <input type="checkbox">
+                               <div class="track">
+                                 <div class="handle"></div>
+                               </div>
+                             </label>
+                          </li> 
+
+                        </ul> -->
+        <ion-scroll direction="x" class="wide-as-needed text-center scrollTabs">
+            <a class="button inline-button" ng-repeat="section in sections" ng-click="slideGoto($index)" ng-class="{active:myActiveSlide == $index}"><span>{{section.SectionName}}</span></a>
+        </ion-scroll>
+
+              
+        <ion-slide-box class="menuContent" active-slide="myActiveSlide" does-continue="false" on-slide-changed="slideHasChanged($index)">
+
+            <ion-slide ng-repeat="section in sections">
+                <!--<button class="button button-dark" ng-click="openModal()">
+                  OPEN MODAL
+                </button> -->
+                <div class="box">
+                    
+                    
+
+                    <div class="categories" ng-repeat="category in section.Categories">
+                        <ion-item class="item-stable item-icon-right categoryName" ng-click="toggleGroup(category)" ng-class="{active: isGroupShown(category)}">
+                            <i class="icon" ng-class="isGroupShown(category) ? 'ion-ios-arrow-up' : 'ion-ios-arrow-down'"></i> &nbsp; {{category.CategoryName}}
+                        </ion-item>
+                        
+        <ion-scroll direction="y" class="wide-as-needed ">
+                        <div class="items" ng-show="isGroupShown(category)">
+                            <ion-item class="item-accordion" ng-repeat="items in category.Items | filter: $root.filteredItems">
+                                <!--<pre>{{items | json}}</pre>-->
+
+                                <div class="list card">
+                                    
+                                    <div class="item" ng-class="{'border-None' : items.Images.length <= 0}">
+                                        <div class="row">
+                                            <div class="col s3 padding-lr"><span  ng-class="{'item_{{items.FoodType}}': true}"></span>
+                                                {{items.ItemName}}
+                                                <br />
+                                                <a class="tab-item" href="#">
+                                                    <i class="icon ion-thumbsup"></i> Like
+                                                </a>
+                                            </div>
+                                            <div class="col s9 text-right padding-lr spinnerArea">
+                                                <div class="text-right">Rs {{items.Price}}
+                                                &nbsp; </div>
+                                                <div class="spinControllers">
+                                                    <a class="tiny waves-effect waves-teal btn-flat iconMin customizeBtn" ng-if="(items.IsCustomizable == 1)" 
+                                                       ng-click="customizeLink(items)"> Customize</a>
+                                                    
+                                                    <a class="waves-effect waves-teal btn-flat iconMin" ng-click="menuMinusClick(items.ItemId, items)">
+                                                        <i class="tiny material-icons">remove</i></a>
+                                                    <span ng-init="items.ItemCount = 0">
+                                                        {{items.reviewCount + items.confirmCount + items.ItemCount }}</span> 
+                                                    <a class="waves-effect waves-teal btn-flat iconMin" ng-click="menuPlusClick(items.ItemId, items)">
+                                                        <i class="material-icons">add</i></a>
+                                                </div> 
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card item_img_place">
+                                        <div class="card-image waves-effect waves-block waves-light" ng-if="items.Images.length >= 1">
+
+                                            <!--<img class="materialboxed" data-caption="Pic of Item" width="100%" src="http://goodphood.in/dev/Images/{{items.Images[0].img_url}}"> -->
+                                            
+                                            <ion-slide-box class="imagesSlider">
+                                              <ion-slide ng-repeat="image in items.Images"> 
+                                                    <img class="materialboxed" image-lazy-src="http://goodphood.in/dev/Images/{{image.img_url}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="-200">
+                                                  
+                                              </ion-slide> 
+                                            </ion-slide-box>
+                                            
+                                            
+                                        </div>
+                                        <div class="card-content item_Desc">
+                                            <span class="card-title activator grey-text text-darken-4">
+                                                <i class="small material-icons">info</i></span>
+                                        </div>
+                                        <div class="card-reveal">
+                                            <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                                            <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                        </ion-item>     
+                        </div>
+                        
+        </ion-scroll>
+            
+                    </div>
+                </div>
+                </ion-list>
+                </div>
+
+            </ion-slide>
+
+
+        </ion-slide-box>
+
+</ion-view>
+
+
+<ion-footer-bar align-title="left" class="bar-stable menuFooter" ng-if="(itemsReview.reviewItems.length !=0 || itemsReview.confirmedItems.length !=0)" ng-click="orderSummeryClick(orderSummery.ReviewItemCount)">
+
+    <a class="btn-flat btn-large waves-effect waves-light red"><i class="reviewIcon"></i></a>
+
+    <h1 class="title" ng-if="(orderSummery.ReviewItemCount != 0)">
+        <a class="reviewCountBtn waves-effect waves-light btn-flat" ng-if="(orderSummery.ReviewItemCount != 0)">
+            {{orderSummery.ReviewItemCount}} Items to Review</a>
+        <a class="reviewCountBtn waves-effect waves-light btn-flat" ng-if="(orderSummery.ReviewItemCount == 0)">
+            Checkout</a></h1>
+    <div class="buttons" ng-click="doSomething()">
+        <a class="button icon-right ion-chevron-right button-clear button-dark"></a>
+    </div>
+</ion-footer-bar>

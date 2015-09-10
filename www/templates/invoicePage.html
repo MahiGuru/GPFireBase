@@ -1,0 +1,101 @@
+<ion-view view-title="INVOICE">
+    <ion-nav-bar class="bar-stable">
+
+        <!--<ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+    </button>
+  </ion-nav-buttons> -->
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+
+    </ion-nav-bar>
+
+
+    <ion-content>
+        
+        <div class="progress" ng-show="loaderVisible"><div class="indeterminate"></div></div>  
+        <!-- The content of the page --> 
+        <div class="invoiceInfo">
+        <div class="row">
+            <div class="col col-67 padding-lr">
+                <div class="row padding-lr">
+                    <div class="col col-50">Status</div>
+                    <div class="col col-50">{{ invoiceDetails.status }}</div>
+                </div>
+                <div class="row padding-lr">
+                    <div class="col col-50">Invoice No </div>
+                    <div class="col col-50">{{ invoiceDetails.orderId }}</div>
+                </div>
+                <div class="row padding-lr">
+                    <div class="col col-50">Table No</div>
+                    <div class="col col-50">{{ invoiceDetails.tableNo }}</div>
+                </div>
+            </div>
+            <div class="col col-33 padding-lr">
+                <div class="row padding-lr">
+                    <div class="col col-33">Date</div>
+                    <div class="col col-67">{{ invoice.date }}</div>
+                </div>
+                <div class="row padding-lr">
+                    <div class="col col-33">Time</div>
+                    <div class="col col-67">{{ invoice.time }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="invoiceDesc">
+            <div class="row row-bottom headInvoice">
+                <div class="col col-67">Description</div>
+                <div class="col col-33">Total Price</div>
+            </div>
+            <div class="row" ng-repeat="invoice in invoiceDetails.Items">
+                <div class="col col-67">{{invoice.itemName}}</div>
+                <div class="col col-33">Rs {{ invoice.itemPrice }} x {{ invoice.itemQuantity }}</div>
+            </div>
+
+            <div class="row">
+                <div class="col col-67">Bill Amount</div>
+                <div class="col col-33">Rs {{ totalPrice }}</div>
+            </div>
+
+            <div class="row">
+                <div class="col col-67">Vat &#64; 5%</div>
+                <div class="col col-33">{{ vat}}</div>
+            </div>
+            <div class="row">
+                <div class="col col-67">Service Tax &#64; {{ invoiceDetails.serviceTax }}%</div>
+                <div class="col col-33">{{ serviceTax }}</div>
+            </div>
+            <div class="row">
+                <div class="col col-67">Discount</div>
+                <div class="col col-33">{{ Discount }}%</div>
+            </div>
+            <div class="row row-center margin-0">
+                <div class="col col-67">Tip</div>
+                <div class="col col-33">
+                    <div class="list"> 
+                        <div class="input-field col s12 padding-lr">
+                          <input placeholder="tip" id="first_name" type="text" class="validate"> 
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <div class="row padding-lr">
+                <div class="col col-67">Total</div>
+                <div class="col col-33">Rs {{ totalPrice }}</div>
+            </div>
+             
+                <div class="text-center"> 
+                    <a class="waves-effect waves-light btn payByBtn" href="#/gp/feedback/{{orderInfo.orderNumber}}/{{orderInfo.userNumber}}">Pay By Cash</a>
+                    <a class="waves-effect waves-light btn payByBtn" href="#/gp/feedback/{{orderInfo.orderNumber}}/{{orderInfo.userNumber}}">Pay By Cash</a>
+            </div>
+         
+
+        </div>
+
+        <!--<pre>{{ invoiceResponce }}</pre> -->
+<br><br><br><br>
+        <!--<a class="button icon-left ion-chevron-left button-calm" href="#/common/table">TABLE</a>
+        <a class="button icon-right ion-chevron-right button-calm" href="#/gp/feedback/1/1">Feedback PAGE</a> -->
+        </div>
+    </ion-content>
+</ion-view>

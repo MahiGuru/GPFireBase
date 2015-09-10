@@ -1,0 +1,32 @@
+<ion-view view-title="TABLE"> 
+    <ion-content>
+        <div class="signupArea">
+            <h5 class="margin-0 signupHeading center-align">CHECK IN</h5>
+            <br />
+        <div class="row">
+          <div class="col col-80">
+                <div class="row">
+                    <div class="input-field col s12">
+                      <input id="to_order" type="text" class="validate" placeholder="1#1" ng-model="tableDetails.qrNumber">
+                      <label class="active" for="email">Table Order</label>
+                    </div>
+                  </div>  
+          </div>
+          <div class="col col-20">
+                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons" ng-click="tableSelectedClick()">input</i></a>  
+          </div> 
+        </div> 
+        
+        <!-- {{tableDetails}} -->
+
+<!--
+        <button class="button button-block button-positive" ng-click="tableSelectedClick()">
+            GO TO MENU
+        </button>
+
+        <a class="button icon-left ion-chevron-left button-calm" href="#/common/login">login</a>
+        <a class="button icon-right ion-chevron-right button-calm" href="#/gp/menu/1/1/1">MENU</a>
+-->
+        </div>
+    </ion-content>
+</ion-view>
